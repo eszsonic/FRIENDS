@@ -21,8 +21,8 @@
 #define PUFF_OFF 0x2000000000000000
 #define TOUCH_ON 0x3000000000000000
 #define TOUCH_OFF 0x4000000000000000
-#define TEMPERATURE_ON 0x5000000000000000
-#define TEMPERATUR_OFF 0x6000000000000000
+#define THERMISTOR_ON 0x5000000000000000
+#define THERMISTOR_OFF 0x6000000000000000
 #define READ_TIME 0xE000000000000000
 #define SET_TIME 0xF000000000000000
 
@@ -30,6 +30,9 @@
 
 //Define for LED
 #define USE_LED
+
+//Define for thermistor
+#define USE_THERMISTOR
 
 // Globals for half-duplex UART communication
 unsigned int TXByte;    // Value sent over UART when Transmit() is called
@@ -61,6 +64,10 @@ unsigned char ticks_conv_buffer[5];
 volatile unsigned char first_edge_flag=0;
 unsigned int eighth_counter=0;
 
+#ifdef USE_THERMISTOR
+volatile unsigned long long thermistor_start = 0;
+volatile unsigned long long thermistor_end = 0;
+#endif
 
 //interrupt for touch sensor and RF sensor
 //RF sensor not implemented yet
@@ -82,11 +89,30 @@ __interrupt void Port_2(void)
             puff_start_timestamp=eighth_counter<<13| TAR;
             puff_start_timestamp=puff_start_timestamp|((long long)time<<16);  //64-bit fixed point number
             last_pulse_timestamp=puff_start_timestamp;
+#ifdef USE_THERMISTOR
+            //Store initial thermistor value
+            P3OUT |= THERMISTOR_ON_OFF;
+            _delay_cycles(2);
+            ADC10CTL0 |= ENC+ADC10SC;
+            while(ADC10CTL1&ADC10BUSY);
+            thermistor_start=ADC10MEM;
+            P3OUT &= ~THERMISTOR_ON_OFF;
+#endif
         }
         else // for other falling edges except first
         {
             last_pulse_timestamp=eighth_counter<<13|TAR;
             last_pulse_timestamp=last_pulse_timestamp|((long long)time<<16);  //64-bit fixed point number
+
+#ifdef USE_THERMISTOR
+            //Store final thermistor value
+            P3OUT |= THERMISTOR_ON_OFF;
+            _delay_cycles(2);
+            ADC10CTL0 |= ENC+ADC10SC;
+            while(ADC10CTL1&ADC10BUSY);
+            thermistor_end=ADC10MEM;
+            P3OUT &= ~THERMISTOR_ON_OFF;
+#endif
 
         }
 
@@ -190,6 +216,26 @@ int main(void) {
     //P1OUT = 0xFFFF;
     P1OUT &= ~LED;
 
+#ifdef USE_THERMISTOR
+    //Configure P3.0 as output, power off the thermistor
+    P3DIR = 0x00;
+    P3DIR |= THERMISTOR_ON_OFF;
+    P3OUT &= ~THERMISTOR_ON_OFF;
+
+//    //ADC10SR to reduce power consumption
+//    //ADC10SHT1/SHT0 - 64 cycles to read
+//    //+REFON+REF2_5V
+//    //ADC10CTL0  = ADC10ON+ADC10SR+ADC10SHT1;
+//    //ADC10CTL0  = ADC10ON+ADC10SR+REFON+REF2_5V+SREF0+ADC10SHT0+ADC10SHT1;
+      ADC10CTL0  = ADC10ON+ADC10SR+ADC10SHT0+ADC10SHT1+SREF_0;
+//    //ADC clock, no divider, single channel A3
+      ADC10CTL1  = INCH1+INCH0;
+//    //Enable analog pin A3 (P1.3)
+     ADC10AE0 =  INCH_3;
+
+#endif
+
+
     //Sensor inputs
     //P2DIR = 0xFFFF;
     //Touch
@@ -254,6 +300,7 @@ int main(void) {
     _EINT();
 
     //main body
+    UART_PRINT("POWER ON\r\n");
     first_edge_flag=1;
 
     while (1)
@@ -264,7 +311,6 @@ int main(void) {
         {
             DISABLE_SENSORS();
             rfWriteToFlash=false;
-
 
             UART_PRINT("Puff\r\n");
 
@@ -284,6 +330,19 @@ int main(void) {
                 last_pulse_timestamp=last_pulse_timestamp|PUFF_OFF;
                 write_timestamp(flash_position, (unsigned char *)&last_pulse_timestamp);
                 flash_position+=2*sizeof(unsigned long);
+
+
+#ifdef USE_THERMISTOR
+                //If thermistor is enabled, write start and end readings for the puff
+                thermistor_start=thermistor_start|THERMISTOR_ON;
+                write_timestamp(flash_position, (unsigned char *)&thermistor_start);
+                flash_position+=2*sizeof(unsigned long);
+
+                thermistor_end=thermistor_end|THERMISTOR_OFF;
+                write_timestamp(flash_position, (unsigned char *)&thermistor_end);
+                flash_position+=2*sizeof(unsigned long);
+#endif
+
 
                 deep_power_down();
             }
@@ -319,6 +378,18 @@ int main(void) {
                 touch_end_timestamp=touch_end_timestamp|TOUCH_OFF;
                 write_timestamp(flash_position, (unsigned char *)&touch_end_timestamp);
                 flash_position+=2*sizeof(unsigned long);
+
+
+#ifdef USE_THERMISTOR
+                //If thermistor is enabled, write start and end readings for the puff
+                thermistor_start=thermistor_start|THERMISTOR_ON;
+                write_timestamp(flash_position, (unsigned char *)&thermistor_start);
+                flash_position+=2*sizeof(unsigned long);
+
+                thermistor_end=thermistor_end|THERMISTOR_OFF;
+                write_timestamp(flash_position, (unsigned char *)&thermistor_end);
+                flash_position+=2*sizeof(unsigned long);
+#endif
 
                 deep_power_down();
             }
