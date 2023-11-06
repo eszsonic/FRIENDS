@@ -2,6 +2,7 @@
 #define TIMESTAMP_BUFFER_SIZE	2
 #define LED		BIT0
 #define TOUCH BIT1
+#define THERMISTOR_ON_OFF BIT0
 
 #define UART_CLK 8000000
 #define BAUD_RATE 115200

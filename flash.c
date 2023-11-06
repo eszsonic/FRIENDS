@@ -253,8 +253,8 @@ unsigned long GetFlashPosition()
 
 inline unsigned char isFlashEnd(unsigned long position)
 {
-    //Check if the flas is about to overflow
-    if(position<FLASH_SIZE-4)
+    //Check if the flash is about to overflow (assuming that we need at least 32 bytes )
+    if(position<FLASH_SIZE-32)
         return 0;
     else
         return 1;
