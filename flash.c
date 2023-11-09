@@ -8,7 +8,7 @@
 
 #include "flash.h"
 #include "lighter.h"
-#include <msp430g2452.h>
+#include <msp430g2433.h>
 
 
 inline unsigned char send_byte(unsigned char byte_value)
