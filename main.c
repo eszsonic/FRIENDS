@@ -84,7 +84,7 @@ __interrupt void Port_2(void)
         {
             first_edge_flag =0;
 #ifdef USE_LED
-            P1OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
+            P3OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
 #endif
             puff_start_timestamp=eighth_counter<<13| TAR;
             puff_start_timestamp=puff_start_timestamp|((long long)time<<16);  //64-bit fixed point number
@@ -135,7 +135,7 @@ __interrupt void Port_2(void)
         else
         {
 #ifdef USE_LED
-            //P1OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
+            //P3OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
 #endif
 
             touch_start_timestamp=eighth_counter<<13| TAR;
@@ -210,18 +210,19 @@ int main(void) {
     //volatile unsigned int i;  // volatile to prevent optimization
     WDTCTL = WDTPW | WDTHOLD;       // Stop watchdog timer
 
-    //P1 -
-    P1DIR = 0x0;
-    P1DIR |= LED ;                  // Set P1.0 for output direction
-    //P1OUT = 0xFFFF;
-    P1OUT &= ~LED;
+    //P3 -
+    P3DIR = 0x00;
+    P3DIR |= LED;                  // Set P3.7 for output direction
+    //P3DIR = 0xFF;
+    //P3OUT = 0xFFFF;
+//    P3OUT |= LED;
+    P3OUT &= ~LED;
 
 #ifdef USE_THERMISTOR
     //Configure P3.0 as output, power off the thermistor
-    P3DIR = 0x00;
+//    P3DIR = 0x00; //Initialized before
     P3DIR |= THERMISTOR_ON_OFF;
     P3OUT &= ~THERMISTOR_ON_OFF;
-
 //    //ADC10SR to reduce power consumption
 //    //ADC10SHT1/SHT0 - 64 cycles to read
 //    //+REFON+REF2_5V
@@ -287,9 +288,9 @@ int main(void) {
 
 
     //Verify LED operation
-    P1OUT |= LED;
+    P3OUT |= LED;
     delay_ms(1000);
-    P1OUT &= ~LED;
+    P3OUT &= ~LED;
 
 
     FlashInit();
@@ -348,7 +349,7 @@ int main(void) {
             }
 
 #ifdef USE_LED
-            P1OUT &=~ LED;
+            P3OUT &=~ LED;
 #endif
             last_pulse_timestamp=MAX_TIME_VALUE;
             first_edge_flag=1;
@@ -394,7 +395,7 @@ int main(void) {
                 deep_power_down();
             }
 #ifdef USE_LED
-            //P1OUT &=~ LED;
+            //P3OUT &=~ LED;
 #endif
             ENABLE_SENSORS();
         }
@@ -475,7 +476,7 @@ int main(void) {
                     {
 
                         //LED ON
-                        P1OUT |= LED;
+                        P3OUT |= LED;
                         //Print messages
                         UART_PRINT("Disconnect USB and keep disconnected until green LED is off\r\n");
                         while(1);
