@@ -36,7 +36,7 @@
 
 // Globals for half-duplex UART communication
 unsigned int TXByte;    // Value sent over UART when Transmit() is called
-unsigned int RXByte;    // Value recieved once hasRecieved is set
+unsigned int RXByte;    // Value received once hasRecieved is set
 
 bool rxReady;   // Lets the program know when a byte is received
 bool rfWriteToFlash = false;
@@ -84,8 +84,9 @@ __interrupt void Port_2(void)
         {
             first_edge_flag =0;
 #ifdef USE_LED
-            P1OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
+            P3OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
 #endif
+
             puff_start_timestamp=eighth_counter<<13| TAR;
             puff_start_timestamp=puff_start_timestamp|((long long)time<<16);  //64-bit fixed point number
             last_pulse_timestamp=puff_start_timestamp;
@@ -95,7 +96,8 @@ __interrupt void Port_2(void)
             _delay_cycles(2);
             ADC10CTL0 |= ENC+ADC10SC;
             while(ADC10CTL1&ADC10BUSY);
-            thermistor_start=ADC10MEM;
+            thermistor_start = ADC10MEM;
+            thermistor_end = thermistor_start;  // Initialize thermistor_end to thermistor_start
             P3OUT &= ~THERMISTOR_ON_OFF;
 #endif
         }
@@ -110,9 +112,10 @@ __interrupt void Port_2(void)
             _delay_cycles(2);
             ADC10CTL0 |= ENC+ADC10SC;
             while(ADC10CTL1&ADC10BUSY);
-            thermistor_end=ADC10MEM;
+            thermistor_end = ADC10MEM;    // Update thermistor_end with the latest reading
             P3OUT &= ~THERMISTOR_ON_OFF;
 #endif
+
 
         }
 
@@ -135,7 +138,7 @@ __interrupt void Port_2(void)
         else
         {
 #ifdef USE_LED
-            //P1OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
+            //P3OUT |= LED; // LED is on when button is pressed (port interrupt occurs)
 #endif
 
             touch_start_timestamp=eighth_counter<<13| TAR;
@@ -210,18 +213,19 @@ int main(void) {
     //volatile unsigned int i;  // volatile to prevent optimization
     WDTCTL = WDTPW | WDTHOLD;       // Stop watchdog timer
 
-    //P1 -
-    P1DIR = 0x0;
-    P1DIR |= LED ;                  // Set P1.0 for output direction
-    //P1OUT = 0xFFFF;
-    P1OUT &= ~LED;
+    //P3 -
+    P3DIR = 0x00;
+    P3DIR |= LED;                  // Set P3.7 for output direction
+    //P3DIR = 0xFF;
+    //P3OUT = 0xFFFF;
+//    P3OUT |= LED;
+    P3OUT &= ~LED;
 
 #ifdef USE_THERMISTOR
     //Configure P3.0 as output, power off the thermistor
-    P3DIR = 0x00;
+//    P3DIR = 0x00; //Initialized before
     P3DIR |= THERMISTOR_ON_OFF;
     P3OUT &= ~THERMISTOR_ON_OFF;
-
 //    //ADC10SR to reduce power consumption
 //    //ADC10SHT1/SHT0 - 64 cycles to read
 //    //+REFON+REF2_5V
@@ -287,9 +291,9 @@ int main(void) {
 
 
     //Verify LED operation
-    P1OUT |= LED;
+    P3OUT |= LED;
     delay_ms(1000);
-    P1OUT &= ~LED;
+    P3OUT &= ~LED;
 
 
     FlashInit();
@@ -312,7 +316,7 @@ int main(void) {
             DISABLE_SENSORS();
             rfWriteToFlash=false;
 
-            UART_PRINT("Puff\r\n");
+            //UART_PRINT("Puff\r\n");
 
             //Check if at the end of flash
             if(!isFlashEnd(flash_position))
@@ -348,7 +352,7 @@ int main(void) {
             }
 
 #ifdef USE_LED
-            P1OUT &=~ LED;
+            P3OUT &=~ LED;
 #endif
             last_pulse_timestamp=MAX_TIME_VALUE;
             first_edge_flag=1;
@@ -379,13 +383,12 @@ int main(void) {
                 write_timestamp(flash_position, (unsigned char *)&touch_end_timestamp);
                 flash_position+=2*sizeof(unsigned long);
 
-
 #ifdef USE_THERMISTOR
-                //If thermistor is enabled, write start and end readings for the puff
+                //If thermistor is enabled, write start readings for the puff
                 thermistor_start=thermistor_start|THERMISTOR_ON;
                 write_timestamp(flash_position, (unsigned char *)&thermistor_start);
                 flash_position+=2*sizeof(unsigned long);
-
+                //If thermistor is disabled, write end readings for the puff
                 thermistor_end=thermistor_end|THERMISTOR_OFF;
                 write_timestamp(flash_position, (unsigned char *)&thermistor_end);
                 flash_position+=2*sizeof(unsigned long);
@@ -394,7 +397,7 @@ int main(void) {
                 deep_power_down();
             }
 #ifdef USE_LED
-            //P1OUT &=~ LED;
+            //P3OUT &=~ LED;
 #endif
             ENABLE_SENSORS();
         }
@@ -475,7 +478,7 @@ int main(void) {
                     {
 
                         //LED ON
-                        P1OUT |= LED;
+                        P3OUT |= LED;
                         //Print messages
                         UART_PRINT("Disconnect USB and keep disconnected until green LED is off\r\n");
                         while(1);

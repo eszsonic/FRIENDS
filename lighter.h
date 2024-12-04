@@ -1,6 +1,6 @@
 #define SENSOR	 BIT0								// Button press sensor
 #define TIMESTAMP_BUFFER_SIZE	2
-#define LED		BIT0
+#define LED		BIT7
 #define TOUCH BIT1
 #define THERMISTOR_ON_OFF BIT0
 
