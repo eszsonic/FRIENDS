@@ -251,8 +251,8 @@ def main(participant_dir, out_dir):
 
 
 if __name__ == '__main__':
-    Participant_Dir = r'C:\Users\claws\Documents\FRIENDS_UB_LAB\FRIENDS Paper Lab Data, Code and Results\Participant Data'
-    Out_Dir = r'C:\Users\claws\Documents\FRIENDS_UB_LAB\FRIENDS Paper Lab Data, Code and Results\Results\Duration_Distribution_and_Threshold_Sensitivity'
+    Participant_Dir = r'C:\Users\claws\Documents\FRIENDS\Laboratory Validation with Human Participants\Participant Data'
+    Out_Dir = r'C:\Users\claws\Documents\FRIENDS\Laboratory Validation with Human Participants\Duration_Distribution_and_Threshold_Sensitivity'
     if len(sys.argv) >= 3:
         Participant_Dir = sys.argv[1]
         Out_Dir = sys.argv[2]
