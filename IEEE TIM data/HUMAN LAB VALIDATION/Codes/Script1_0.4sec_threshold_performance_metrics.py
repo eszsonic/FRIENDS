@@ -37,8 +37,12 @@ from collections import Counter
 from scipy import stats
 
 FRAME_RATE = 25
-TOLERANCE_SEC = 1.0       # applied once to the raw camera/FRIENDS puff gap in match_puffs
-                           # (single application, not padded onto both intervals independently)
+TOLERANCE_SEC = 0.5       # per the manuscript's methods text: "a TP was counted ... if it
+                           # overlapped [the other event], or the gap between one end and the
+                           # other's start did not exceed 1.0 s (a +/-0.5 s tolerance applied to
+                           # each puff boundary)" -- i.e. 0.5 s padding on EACH of the two
+                           # compared puff boundaries (camera and FRIENDS independently), summing
+                           # to a combined allowed gap of 1.0 s. See match_puffs below.
 MIN_PUFF_DURATION = 0.4   # manuscript's production threshold
 B, SEED = 10000, 12345    # bootstrap replicates / seed -- matches the bench-testing
                            # coauthor's device_bootstrap.py, and every other bootstrap
@@ -270,10 +274,18 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 
     for j, (fr_s, fr_e) in enumerate(friends_puffs):
         for i, (cs, ce) in enumerate(camera_puffs):
-            # tolerance applied once to the raw gap between the two intervals (not padded
-            # onto both sides independently -- see TOLERANCE_SEC comment above)
-            if not ((ce + tolerance_samples) <= fr_s or
-                    (fr_e + tolerance_samples) <= cs):
+            # INTENTIONAL, not a bug: tolerance_samples is applied to BOTH sides of the
+            # comparison (once on the camera boundary, once on the FRIENDS boundary), so the
+            # combined allowed gap between the two raw intervals is 2 x tolerance_samples, not
+            # tolerance_samples. This matches the manuscript's methods text verbatim: "a TP was
+            # counted ... if it overlapped [the other event], or the gap between one end and the
+            # other's start did not exceed 1.0 s (a +/-0.5 s tolerance applied to each puff
+            # boundary)" -- i.e. TOLERANCE_SEC=0.5 s padding independently applied to EACH of
+            # the two boundaries being compared, summing to the documented 1.0 s combined gap.
+            # Do not "simplify" this to a single-sided tolerance check -- that would silently
+            # halve the matching window and contradict the reported method.
+            if not ((ce + tolerance_samples) <= (fr_s - tolerance_samples) or
+                    (fr_e + tolerance_samples) <= (cs - tolerance_samples)):
                 camera_matched[i] = True
                 friends_target[j] = i
                 break
