@@ -296,7 +296,10 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 def precision_recall_f1(tp, fn, fp):
     precision = tp / (tp + fp) if (tp + fp) > 0 else np.nan
     recall = tp / (tp + fn) if (tp + fn) > 0 else np.nan
-    if precision and recall and not np.isnan(precision) and not np.isnan(recall) and (precision + recall) > 0:
+    # NOTE: do not test "if precision and recall" -- 0.0 is a legitimate value and is
+    # falsy in Python, which would wrongly route a genuine precision=0 or recall=0
+    # case to NaN instead of the correct F1=0. Test only for NaN and a positive sum.
+    if not np.isnan(precision) and not np.isnan(recall) and (precision + recall) > 0:
         f1 = 2 * precision * recall / (precision + recall)
     else:
         f1 = np.nan
@@ -597,12 +600,12 @@ def main(participant_dir, out_xlsx_path):
     for col in ['Mean', 'Macro 95% CI Lower (BCa)', 'Macro 95% CI Upper (BCa)', 'Median', 'Std Dev', 'Min', 'Max']:
         macro_stats[col] = macro_stats[col].round(4)
 
+    # errors is always empty here -- main() raises above before reaching this
+    # point if any participant failed, so no partial-cohort Excel is ever written.
     with pd.ExcelWriter(out_xlsx_path) as writer:
         per_participant.to_excel(writer, sheet_name='Per_Participant', index=False)
         pooled_summary.to_excel(writer, sheet_name='Pooled_Summary', index=False)
         macro_stats.to_excel(writer, sheet_name='Mean_Median_Mode', index=False)
-        if errors:
-            pd.DataFrame(errors).to_excel(writer, sheet_name='Errors', index=False)
 
     print('\n=== DONE ===')
     print(f'Written: {out_xlsx_path}')

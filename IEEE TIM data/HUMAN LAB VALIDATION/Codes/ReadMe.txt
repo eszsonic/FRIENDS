@@ -55,14 +55,14 @@ Precision/Recall/F1, each with a 95% BCa (bias-corrected and accelerated)
 bootstrap CI -- participant-cluster resampling, B=10,000 replicates,
 seed=12345.
 
-If any participant fails to process, main() raises rather than silently
-computing aggregates on a partial cohort.
+If any participant fails to process, main() raises immediately rather than
+silently computing aggregates on a partial cohort -- no output file is
+written in that case.
 
 Output: Results/Reconciled_Detection_Metrics_Summary.xlsx
     - Per_Participant   per-participant counts, durations, P/R/F1
     - Pooled_Summary    pooled TP/FN/FP and pooled P/R/F1 with 95% CI
     - Mean_Median_Mode  macro P/R/F1 (mean/median/mode/SD/min/max) with 95% CI
-    - Errors            (only if any participant failed to process)
 
 Verified manuscript numbers (0.4 s threshold):
     Pooled:  TP=799  FN=67  FP=73   (true puffs=866)

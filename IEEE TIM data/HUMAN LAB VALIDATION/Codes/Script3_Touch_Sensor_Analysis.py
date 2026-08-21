@@ -167,7 +167,9 @@ def run_participant_touch(participant, participant_dir_path):
     def _prf(tp_, fn_, fp_):
         p = tp_ / (tp_ + fp_) if (tp_ + fp_) > 0 else np.nan
         r = tp_ / (tp_ + fn_) if (tp_ + fn_) > 0 else np.nan
-        f1 = 2 * p * r / (p + r) if p and r and not np.isnan(p) and not np.isnan(r) and (p + r) > 0 else np.nan
+        # NOTE: test only NaN + positive sum, not truthiness of p/r -- 0.0 is a
+        # legitimate (falsy) value that would otherwise wrongly route to NaN.
+        f1 = 2 * p * r / (p + r) if not np.isnan(p) and not np.isnan(r) and (p + r) > 0 else np.nan
         return p, r, f1
 
     precision, recall, f1 = _prf(tp, fn, fp)
