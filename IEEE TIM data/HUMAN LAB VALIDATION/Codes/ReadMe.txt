@@ -3,8 +3,12 @@ FRIENDS Human Laboratory Study -- Code
 
 Scope: human laboratory validation only (22 participants).
 
-Note: BLAND_ALTMAN_FIGURE/ (bland_altman_human.py and its output) is a
-separate, unrelated file in this folder -- not part of this pipeline.
+Note: BLAND_ALTMAN_FIGURE/ contains only a leftover copy of
+Reconciled_Detection_Metrics_Summary.xlsx -- superseded by the canonical
+copy in Results/ (see Script1 below) and not part of this pipeline.
+Its former scripts (bland_altman_human.py and a stale duplicate of
+Script4) have been removed; puff-duration correlation/Bland-Altman is
+Script4_Duration_Correlation_BlandAltman.py in this Codes/ folder.
 
 All scripts take zero arguments by default: they locate "Participant
 Data" and write into "Results" using paths relative to the scripts' own

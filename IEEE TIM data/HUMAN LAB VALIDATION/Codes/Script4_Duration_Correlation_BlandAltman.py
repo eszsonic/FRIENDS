@@ -29,7 +29,7 @@
 # corresponding FRIENDS event) -- that conflates detection disagreement
 # (already covered by the confusion-matrix precision/recall/F1 analysis)
 # with duration-measurement disagreement, and is not a valid Bland-Altman
-# comparison. See Codes/Script1_Puff_Analysis_Reconciled_Confusion_Matrix.py
+# comparison. See Codes/Script1_0.4sec_threshold_performance_metrics.py
 # for the confusion matrix.
 
 import os
@@ -93,7 +93,10 @@ def analyze_pair(cam, fri, label):
     loa_hi = bias + 1.96 * sd_diff
 
     se_bias = sd_diff / np.sqrt(n)
-    se_loa = np.sqrt(3 * sd_diff ** 2 / n)
+    # finite-sample SE of a limit of agreement (Var(mean) + 1.96^2*Var(SD), via
+    # the delta method); sqrt(3/n) -- the original Bland & Altman (1986)
+    # large-sample approximation -- differs from this by <0.5% at n=22.
+    se_loa = sd_diff * np.sqrt(1 / n + 1.96 ** 2 / (2 * (n - 1)))
     bias_ci = t_crit * se_bias
     loa_ci = t_crit * se_loa
 
@@ -235,7 +238,7 @@ def main(participant_dir, out_dir):
             'not from any pre-existing summary spreadsheet.',
             'Camera/FRIENDS mean duration 95% CI: t-interval across the 22 participant-level means '
             '(mean +/- t(0.975, n-1) * SD/sqrt(n)) -- the same t-interval method used for the pooled '
-            'individual-puff duration distribution in Script2.',
+            'individual-puff duration distribution in Script5.',
             'Bland-Altman: bias = mean(Camera-FRIENDS); LoA = bias +/- 1.96*SD(diff); '
             'proportional bias = Pearson r between per-participant mean and difference.',
         ]}).to_excel(writer, sheet_name='Method', index=False)

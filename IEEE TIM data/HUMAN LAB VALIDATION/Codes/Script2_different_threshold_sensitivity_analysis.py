@@ -130,7 +130,17 @@ def threshold_sensitivity(participant_dir, out_dir):
 
 def main(participant_dir, out_dir):
     os.makedirs(out_dir, exist_ok=True)
-    threshold_df = threshold_sensitivity(participant_dir, out_dir)
+
+    # threshold_sensitivity() sweeps script1.MIN_PUFF_DURATION through
+    # THRESHOLD_SWEEP and leaves it at the final value (0.6 s) -- restore
+    # whatever it was before this call, so a later import-and-reuse of this
+    # script1 instance (e.g. script1.run_participant() called again after
+    # main() returns) doesn't silently run at the wrong threshold.
+    original_threshold = script1.MIN_PUFF_DURATION
+    try:
+        threshold_df = threshold_sensitivity(participant_dir, out_dir)
+    finally:
+        script1.MIN_PUFF_DURATION = original_threshold
 
     out_xlsx = os.path.join(out_dir, 'Threshold_Sensitivity_Performance_Metrics.xlsx')
     with pd.ExcelWriter(out_xlsx) as writer:
