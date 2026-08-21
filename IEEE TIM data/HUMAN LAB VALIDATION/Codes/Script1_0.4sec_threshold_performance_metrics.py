@@ -37,7 +37,7 @@ from collections import Counter
 from scipy import stats
 
 FRAME_RATE = 25
-TOLERANCE_SEC = 0.5
+TOLERANCE_SEC = 1.0
 MIN_PUFF_DURATION = 0.4   # manuscript's production threshold
 B, SEED = 10000, 12345    # bootstrap replicates / seed -- matches the bench-testing
                            # coauthor's device_bootstrap.py, and every other bootstrap
@@ -269,11 +269,11 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 
     for j, (fr_s, fr_e) in enumerate(friends_puffs):
         for i, (cs, ce) in enumerate(camera_puffs):
-        if not ((ce + tolerance_samples) <= fr_s or
-                (fr_e + tolerance_samples) <= cs):
-                camera_matched[i] = True
-                friends_target[j] = i
-                break
+            if not ((ce + tolerance_samples) <= fr_s or
+                    (fr_e + tolerance_samples) <= cs):
+                    camera_matched[i] = True
+                    friends_target[j] = i
+                    break
 
     return camera_puffs, friends_puffs, camera_matched, friends_target
 
