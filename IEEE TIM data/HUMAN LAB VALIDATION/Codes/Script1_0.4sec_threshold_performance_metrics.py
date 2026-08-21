@@ -269,8 +269,8 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 
     for j, (fr_s, fr_e) in enumerate(friends_puffs):
         for i, (cs, ce) in enumerate(camera_puffs):
-            if not ((ce + tolerance_samples) <= (fr_s - tolerance_samples) or
-                    (fr_e + tolerance_samples) <= (cs - tolerance_samples)):
+        if not ((ce + tolerance_samples) <= fr_s or
+                (fr_e + tolerance_samples) <= cs):
                 camera_matched[i] = True
                 friends_target[j] = i
                 break
