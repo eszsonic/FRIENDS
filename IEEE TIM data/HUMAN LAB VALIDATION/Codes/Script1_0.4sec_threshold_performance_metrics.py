@@ -37,7 +37,8 @@ from collections import Counter
 from scipy import stats
 
 FRAME_RATE = 25
-TOLERANCE_SEC = 1.0
+TOLERANCE_SEC = 1.0       # applied once to the raw camera/FRIENDS puff gap in match_puffs
+                           # (single application, not padded onto both intervals independently)
 MIN_PUFF_DURATION = 0.4   # manuscript's production threshold
 B, SEED = 10000, 12345    # bootstrap replicates / seed -- matches the bench-testing
                            # coauthor's device_bootstrap.py, and every other bootstrap
@@ -255,7 +256,7 @@ def fft_correlate_full(a, b):
 # Reconciled matching: TP counted on the CAMERA (true-puff) side
 # ---------------------------------------------------------------
 
-def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolerance_sec=0.5):
+def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolerance_sec=TOLERANCE_SEC):
     """
     Returns camera_puffs, friends_puffs, camera_matched (bool per true puff),
     friends_target (camera index each FRIENDS puff matched, or None).
@@ -269,11 +270,13 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 
     for j, (fr_s, fr_e) in enumerate(friends_puffs):
         for i, (cs, ce) in enumerate(camera_puffs):
+            # tolerance applied once to the raw gap between the two intervals (not padded
+            # onto both sides independently -- see TOLERANCE_SEC comment above)
             if not ((ce + tolerance_samples) <= fr_s or
                     (fr_e + tolerance_samples) <= cs):
-                    camera_matched[i] = True
-                    friends_target[j] = i
-                    break
+                camera_matched[i] = True
+                friends_target[j] = i
+                break
 
     return camera_puffs, friends_puffs, camera_matched, friends_target
 
@@ -477,6 +480,11 @@ def main(participant_dir, out_xlsx_path):
             import traceback
             traceback.print_exc()
             errors.append({'Participant': participant, 'Error': str(e)})
+
+    if errors:
+        raise RuntimeError(
+            f'{len(errors)} participant(s) failed to process -- refusing to compute aggregates on a '
+            f'partial cohort: {[e["Participant"] for e in errors]}. See tracebacks above.')
 
     df = pd.DataFrame(rows)
 
