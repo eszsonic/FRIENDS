@@ -134,16 +134,26 @@ Output: Results/Duration_Correlation_BlandAltman/
     - Duration_Correlation_BlandAltman.xlsx (Per_Participant_Durations, Summary, Method)
     - BlandAltman_PuffDuration.png, Correlation_PuffDuration.png
 
+Duration pairing note: Script1.match_puffs allows multiple FRIENDS
+detections to match one fragmented camera puff. run_participant()
+aggregates (sums) FRIENDS fragment durations per matched camera puff
+before averaging, so Avg Hit Duration (Camera) and Avg Hit Duration
+(FRIENDS) are both built from exactly one value per matched (TP) puff --
+a true one-to-one comparison (Copilot PR review finding).
+
 Verified numbers (n=22 participants):
     Camera : mean=2.5739 s  SD=0.8348 s  95% CI=[2.2038, 2.9440]
-    FRIENDS: mean=2.0460 s  SD=0.5852 s  95% CI=[1.7865, 2.3055]
-    Pearson r=0.8690 (p=1.5e-07)
-    Bland-Altman bias (Camera-FRIENDS) = +0.5279 s (95% CI +0.3345 to +0.7213)
-    95% limits of agreement: -0.3270 to +1.3829 s
-    Proportional bias: r=0.5912, p=0.0038
+    FRIENDS: mean=2.1023 s  SD=0.6856 s  95% CI=[1.7983, 2.4063]
+    Pearson r=0.9431 (p=5.1e-11)
+    Bland-Altman bias (Camera-FRIENDS) = +0.4716 s (95% CI +0.3406 to +0.6027)
+    95% limits of agreement: -0.1076 to +1.0509 s
+    Proportional bias: r=0.5119, p=0.0149
     Note: the manuscript's camera mean duration (2.53 s) is stale -- the
     verified value is 2.57 s (SD 0.83 s is correct). This needs correcting
-    in the manuscript.
+    in the manuscript. The FRIENDS mean, Pearson r, bias, and LoA above
+    also differ from earlier manuscript drafts because of the fragment-
+    aggregation fix; the manuscript's duration-agreement numbers need a
+    full update to match (r improves from 0.87 to 0.94).
 
 
 Script5_Puff_Duration_Distribution.py
