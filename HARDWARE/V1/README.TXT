@@ -1,0 +1,1 @@
+This folder will contain the hardware design of FRIENDS device (schematic, PCB and bill of materials) upon acceptance of the manuscript for publication
