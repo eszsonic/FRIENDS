@@ -1,0 +1,359 @@
+Local Time: 2026-08-21 00:16:40.373347
+          Event                Information
+        PUFF_ON 2025-07-25 14:40:03.778900
+       PUFF_OFF 2025-07-25 14:40:03.778900
+ TEMPERATURE_ON                        377
+TEMPERATURE_OFF                        377
+        PUFF_ON 2025-07-25 15:33:43.762192
+       PUFF_OFF 2025-07-25 15:33:44.909973
+ TEMPERATURE_ON                        417
+TEMPERATURE_OFF                        370
+        PUFF_ON 2025-07-25 15:34:04.420822
+       PUFF_OFF 2025-07-25 15:34:05.636749
+ TEMPERATURE_ON                        421
+TEMPERATURE_OFF                        387
+        PUFF_ON 2025-07-25 15:34:25.178421
+       PUFF_OFF 2025-07-25 15:34:26.291565
+ TEMPERATURE_ON                        421
+TEMPERATURE_OFF                        381
+        PUFF_ON 2025-07-25 15:34:45.895645
+       PUFF_OFF 2025-07-25 15:34:46.929443
+ TEMPERATURE_ON                        420
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:35:06.432465
+       PUFF_OFF 2025-07-25 15:35:07.642258
+ TEMPERATURE_ON                        421
+TEMPERATURE_OFF                        371
+        PUFF_ON 2025-07-25 15:35:27.144547
+       PUFF_OFF 2025-07-25 15:35:28.290436
+ TEMPERATURE_ON                        417
+TEMPERATURE_OFF                        370
+        PUFF_ON 2025-07-25 15:35:47.900375
+       PUFF_OFF 2025-07-25 15:35:49.012909
+ TEMPERATURE_ON                        419
+TEMPERATURE_OFF                        364
+        PUFF_ON 2025-07-25 15:36:08.558868
+       PUFF_OFF 2025-07-25 15:36:09.654129
+ TEMPERATURE_ON                        417
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:36:29.259109
+       PUFF_OFF 2025-07-25 15:36:30.308701
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:36:49.914261
+       PUFF_OFF 2025-07-25 15:36:51.026840
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        369
+        PUFF_ON 2025-07-25 15:37:10.528107
+       PUFF_OFF 2025-07-25 15:37:11.680466
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:37:31.282150
+       PUFF_OFF 2025-07-25 15:37:32.394394
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:37:51.893311
+       PUFF_OFF 2025-07-25 15:37:53.043640
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        366
+        PUFF_ON 2025-07-25 15:38:12.656128
+       PUFF_OFF 2025-07-25 15:38:13.751022
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        378
+        PUFF_ON 2025-07-25 15:38:33.256699
+       PUFF_OFF 2025-07-25 15:38:34.413055
+ TEMPERATURE_ON                        418
+TEMPERATURE_OFF                        373
+        PUFF_ON 2025-07-25 15:38:53.907715
+       PUFF_OFF 2025-07-25 15:38:55.056442
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        372
+        PUFF_ON 2025-07-25 15:39:14.667923
+       PUFF_OFF 2025-07-25 15:39:15.762543
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        377
+        PUFF_ON 2025-07-25 15:39:35.310623
+       PUFF_OFF 2025-07-25 15:39:36.421860
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        373
+        PUFF_ON 2025-07-25 15:39:55.919159
+       PUFF_OFF 2025-07-25 15:39:57.142044
+ TEMPERATURE_ON                        420
+TEMPERATURE_OFF                        374
+        PUFF_ON 2025-07-25 15:40:16.630951
+       PUFF_OFF 2025-07-25 15:40:17.785675
+ TEMPERATURE_ON                        416
+TEMPERATURE_OFF                        378
+        PUFF_ON 2025-07-25 15:40:37.379318
+       PUFF_OFF 2025-07-25 15:40:38.427658
+ TEMPERATURE_ON                        414
+TEMPERATURE_OFF                        377
+        PUFF_ON 2025-07-25 15:40:57.931427
+       PUFF_OFF 2025-07-25 15:40:59.133026
+ TEMPERATURE_ON                        413
+TEMPERATURE_OFF                        379
+        PUFF_ON 2025-07-25 15:41:18.643677
+       PUFF_OFF 2025-07-25 15:41:19.788467
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        378
+        PUFF_ON 2025-07-25 15:41:39.393112
+       PUFF_OFF 2025-07-25 15:41:40.520538
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        379
+        PUFF_ON 2025-07-25 15:42:00.047974
+       PUFF_OFF 2025-07-25 15:42:01.159271
+ TEMPERATURE_ON                        414
+TEMPERATURE_OFF                        377
+        PUFF_ON 2025-07-25 15:42:20.764801
+       PUFF_OFF 2025-07-25 15:42:21.876175
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        375
+        PUFF_ON 2025-07-25 15:42:41.418930
+       PUFF_OFF 2025-07-25 15:42:42.513702
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        376
+        PUFF_ON 2025-07-25 15:43:02.056381
+       PUFF_OFF 2025-07-25 15:43:03.167084
+ TEMPERATURE_ON                        414
+TEMPERATURE_OFF                        374
+        PUFF_ON 2025-07-25 15:43:22.769913
+       PUFF_OFF 2025-07-25 15:43:23.880707
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 15:43:43.422516
+       PUFF_OFF 2025-07-25 15:43:44.533157
+ TEMPERATURE_ON                        415
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 16:40:10.031952
+       PUFF_OFF 2025-07-25 16:40:12.172165
+ TEMPERATURE_ON                        429
+TEMPERATURE_OFF                        302
+        PUFF_ON 2025-07-25 16:40:32.783737
+       PUFF_OFF 2025-07-25 16:40:35.031662
+ TEMPERATURE_ON                        430
+TEMPERATURE_OFF                        288
+        PUFF_ON 2025-07-25 16:40:55.639297
+       PUFF_OFF 2025-07-25 16:40:57.904556
+ TEMPERATURE_ON                        426
+TEMPERATURE_OFF                        277
+        PUFF_ON 2025-07-25 16:41:18.541077
+       PUFF_OFF 2025-07-25 16:41:20.675583
+ TEMPERATURE_ON                        421
+TEMPERATURE_OFF                        277
+        PUFF_ON 2025-07-25 16:41:41.395813
+       PUFF_OFF 2025-07-25 16:41:43.528671
+ TEMPERATURE_ON                        418
+TEMPERATURE_OFF                        277
+        PUFF_ON 2025-07-25 16:42:04.177673
+       PUFF_OFF 2025-07-25 16:42:06.388458
+ TEMPERATURE_ON                        414
+TEMPERATURE_OFF                        271
+        PUFF_ON 2025-07-25 16:42:27.043228
+       PUFF_OFF 2025-07-25 16:42:29.252853
+ TEMPERATURE_ON                        411
+TEMPERATURE_OFF                        269
+        PUFF_ON 2025-07-25 16:42:49.789459
+       PUFF_OFF 2025-07-25 16:42:52.042618
+ TEMPERATURE_ON                        408
+TEMPERATURE_OFF                        267
+        PUFF_ON 2025-07-25 16:43:12.644012
+       PUFF_OFF 2025-07-25 16:43:14.904404
+ TEMPERATURE_ON                        406
+TEMPERATURE_OFF                        264
+        PUFF_ON 2025-07-25 16:43:35.507507
+       PUFF_OFF 2025-07-25 16:43:37.776749
+ TEMPERATURE_ON                        403
+TEMPERATURE_OFF                        256
+        PUFF_ON 2025-07-25 16:43:58.301025
+       PUFF_OFF 2025-07-25 16:44:00.560242
+ TEMPERATURE_ON                        401
+TEMPERATURE_OFF                        255
+        PUFF_ON 2025-07-25 16:44:21.156754
+       PUFF_OFF 2025-07-25 16:44:23.418015
+ TEMPERATURE_ON                        396
+TEMPERATURE_OFF                        254
+        PUFF_ON 2025-07-25 16:44:44.125229
+       PUFF_OFF 2025-07-25 16:44:46.268021
+ TEMPERATURE_ON                        395
+TEMPERATURE_OFF                        237
+        PUFF_ON 2025-07-25 16:45:06.910309
+       PUFF_OFF 2025-07-25 16:45:09.052933
+ TEMPERATURE_ON                        392
+TEMPERATURE_OFF                        266
+        PUFF_ON 2025-07-25 16:45:29.662750
+       PUFF_OFF 2025-07-25 16:45:31.910309
+ TEMPERATURE_ON                        391
+TEMPERATURE_OFF                        258
+        PUFF_ON 2025-07-25 16:45:52.518463
+       PUFF_OFF 2025-07-25 16:45:54.763199
+ TEMPERATURE_ON                        389
+TEMPERATURE_OFF                        258
+        PUFF_ON 2025-07-25 16:46:15.311218
+       PUFF_OFF 2025-07-25 16:46:17.626038
+ TEMPERATURE_ON                        387
+TEMPERATURE_OFF                        257
+        PUFF_ON 2025-07-25 16:46:38.166153
+       PUFF_OFF 2025-07-25 16:46:40.419434
+ TEMPERATURE_ON                        386
+TEMPERATURE_OFF                        253
+        PUFF_ON 2025-07-25 16:47:01.022537
+       PUFF_OFF 2025-07-25 16:47:03.274963
+ TEMPERATURE_ON                        387
+TEMPERATURE_OFF                        251
+        PUFF_ON 2025-07-25 16:47:23.925476
+       PUFF_OFF 2025-07-25 16:47:26.127655
+ TEMPERATURE_ON                        384
+TEMPERATURE_OFF                        252
+        PUFF_ON 2025-07-25 16:47:46.670975
+       PUFF_OFF 2025-07-25 16:47:48.933319
+ TEMPERATURE_ON                        385
+TEMPERATURE_OFF                        244
+        PUFF_ON 2025-07-25 16:48:09.640060
+       PUFF_OFF 2025-07-25 16:48:11.779297
+ TEMPERATURE_ON                        381
+TEMPERATURE_OFF                        242
+        PUFF_ON 2025-07-25 16:48:32.381729
+       PUFF_OFF 2025-07-25 16:48:34.640381
+ TEMPERATURE_ON                        382
+TEMPERATURE_OFF                        236
+        PUFF_ON 2025-07-25 16:48:55.279053
+       PUFF_OFF 2025-07-25 16:48:57.434631
+ TEMPERATURE_ON                        378
+TEMPERATURE_OFF                        237
+        PUFF_ON 2025-07-25 16:49:18.135025
+       PUFF_OFF 2025-07-25 16:49:20.273438
+ TEMPERATURE_ON                        376
+TEMPERATURE_OFF                        238
+        PUFF_ON 2025-07-25 16:49:40.926285
+       PUFF_OFF 2025-07-25 16:49:43.127151
+ TEMPERATURE_ON                        375
+TEMPERATURE_OFF                        241
+        PUFF_ON 2025-07-25 16:50:03.679810
+       PUFF_OFF 2025-07-25 16:50:05.933319
+ TEMPERATURE_ON                        373
+TEMPERATURE_OFF                        240
+        PUFF_ON 2025-07-25 16:50:26.535019
+       PUFF_OFF 2025-07-25 16:50:28.786011
+ TEMPERATURE_ON                        373
+TEMPERATURE_OFF                        232
+        PUFF_ON 2025-07-25 16:50:49.434830
+       PUFF_OFF 2025-07-25 16:50:51.635300
+ TEMPERATURE_ON                        371
+TEMPERATURE_OFF                        230
+        PUFF_ON 2025-07-25 16:51:12.184860
+       PUFF_OFF 2025-07-25 16:51:14.505859
+ TEMPERATURE_ON                        369
+TEMPERATURE_OFF                        228
+        PUFF_ON 2025-07-25 17:50:29.770981
+       PUFF_OFF 2025-07-25 17:50:33.019775
+ TEMPERATURE_ON                        476
+TEMPERATURE_OFF                        368
+        PUFF_ON 2025-07-25 17:51:19.663177
+       PUFF_OFF 2025-07-25 17:51:23.014557
+ TEMPERATURE_ON                        442
+TEMPERATURE_OFF                        306
+        PUFF_ON 2025-07-25 17:52:09.660278
+       PUFF_OFF 2025-07-25 17:52:13.015335
+ TEMPERATURE_ON                        426
+TEMPERATURE_OFF                        291
+        PUFF_ON 2025-07-25 17:52:34.755554
+       PUFF_OFF 2025-07-25 17:52:38.020462
+ TEMPERATURE_ON                        417
+TEMPERATURE_OFF                        278
+        PUFF_ON 2025-07-25 17:52:59.654755
+       PUFF_OFF 2025-07-25 17:53:03.010254
+ TEMPERATURE_ON                        410
+TEMPERATURE_OFF                        274
+        PUFF_ON 2025-07-25 17:53:24.651871
+       PUFF_OFF 2025-07-25 17:53:28.007248
+ TEMPERATURE_ON                        402
+TEMPERATURE_OFF                        246
+        PUFF_ON 2025-07-25 17:53:49.650909
+       PUFF_OFF 2025-07-25 17:53:53.010086
+ TEMPERATURE_ON                        393
+TEMPERATURE_OFF                        247
+        PUFF_ON 2025-07-25 17:54:14.762741
+       PUFF_OFF 2025-07-25 17:54:18.003342
+ TEMPERATURE_ON                        389
+TEMPERATURE_OFF                        279
+        PUFF_ON 2025-07-25 17:54:39.751572
+       PUFF_OFF 2025-07-25 17:54:43.007416
+ TEMPERATURE_ON                        385
+TEMPERATURE_OFF                        276
+        PUFF_ON 2025-07-25 17:55:04.753204
+       PUFF_OFF 2025-07-25 17:55:08.008362
+ TEMPERATURE_ON                        382
+TEMPERATURE_OFF                        276
+        PUFF_ON 2025-07-25 17:55:29.651886
+       PUFF_OFF 2025-07-25 17:55:33.004425
+ TEMPERATURE_ON                        377
+TEMPERATURE_OFF                        272
+        PUFF_ON 2025-07-25 17:55:54.649521
+       PUFF_OFF 2025-07-25 17:55:57.932602
+ TEMPERATURE_ON                        372
+TEMPERATURE_OFF                        259
+        PUFF_ON 2025-07-25 17:56:19.647125
+       PUFF_OFF 2025-07-25 17:56:22.931976
+ TEMPERATURE_ON                        367
+TEMPERATURE_OFF                        232
+        PUFF_ON 2025-07-25 17:56:44.751099
+       PUFF_OFF 2025-07-25 17:56:48.002106
+ TEMPERATURE_ON                        363
+TEMPERATURE_OFF                        237
+        PUFF_ON 2025-07-25 17:57:09.755371
+       PUFF_OFF 2025-07-25 17:57:12.926376
+ TEMPERATURE_ON                        359
+TEMPERATURE_OFF                        235
+        PUFF_ON 2025-07-25 17:57:34.648972
+       PUFF_OFF 2025-07-25 17:57:38.002533
+ TEMPERATURE_ON                        354
+TEMPERATURE_OFF                        235
+        PUFF_ON 2025-07-25 17:57:59.646866
+       PUFF_OFF 2025-07-25 17:58:02.935699
+ TEMPERATURE_ON                        350
+TEMPERATURE_OFF                        229
+        PUFF_ON 2025-07-25 17:58:24.644302
+       PUFF_OFF 2025-07-25 17:58:27.926132
+ TEMPERATURE_ON                        347
+TEMPERATURE_OFF                        258
+        PUFF_ON 2025-07-25 17:58:49.641205
+       PUFF_OFF 2025-07-25 17:58:52.931107
+ TEMPERATURE_ON                        346
+TEMPERATURE_OFF                        246
+        PUFF_ON 2025-07-25 17:59:14.750977
+       PUFF_OFF 2025-07-25 17:59:17.934357
+ TEMPERATURE_ON                        341
+TEMPERATURE_OFF                        232
+        PUFF_ON 2025-07-25 17:59:39.671661
+       PUFF_OFF 2025-07-25 17:59:42.917435
+ TEMPERATURE_ON                        338
+TEMPERATURE_OFF                        227
+        PUFF_ON 2025-07-25 18:00:04.685623
+       PUFF_OFF 2025-07-25 18:00:07.930450
+ TEMPERATURE_ON                        334
+TEMPERATURE_OFF                        212
+        PUFF_ON 2025-07-25 18:00:29.677994
+       PUFF_OFF 2025-07-25 18:00:32.922867
+ TEMPERATURE_ON                        330
+TEMPERATURE_OFF                        213
+        PUFF_ON 2025-07-25 18:00:54.670898
+       PUFF_OFF 2025-07-25 18:00:57.914871
+ TEMPERATURE_ON                        326
+TEMPERATURE_OFF                        194
+        PUFF_ON 2025-07-25 18:01:19.630814
+       PUFF_OFF 2025-07-25 18:01:22.917191
+ TEMPERATURE_ON                        322
+TEMPERATURE_OFF                        185
+        PUFF_ON 2025-07-25 18:01:44.671982
+       PUFF_OFF 2025-07-25 18:01:47.913803
+ TEMPERATURE_ON                        318
+TEMPERATURE_OFF                        191
+        PUFF_ON 2025-07-25 18:02:09.666138
+       PUFF_OFF 2025-07-25 18:02:12.908020
+ TEMPERATURE_ON                        313
+TEMPERATURE_OFF                        177
+        PUFF_ON 2025-07-25 18:02:34.676025
+       PUFF_OFF 2025-07-25 18:02:37.917770
+ TEMPERATURE_ON                        308
+TEMPERATURE_OFF                        161
+      READ_TIME 2025-07-25 20:13:36.937485
