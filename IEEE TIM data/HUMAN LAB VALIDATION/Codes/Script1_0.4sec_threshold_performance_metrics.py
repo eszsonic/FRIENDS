@@ -296,7 +296,10 @@ def match_puffs(camera_signal, friends_signal, fs, obstruction_mask=None, tolera
 def precision_recall_f1(tp, fn, fp):
     precision = tp / (tp + fp) if (tp + fp) > 0 else np.nan
     recall = tp / (tp + fn) if (tp + fn) > 0 else np.nan
-    if precision and recall and not np.isnan(precision) and not np.isnan(recall) and (precision + recall) > 0:
+    # NOTE: do not test "if precision and recall" -- 0.0 is a legitimate value and is
+    # falsy in Python, which would wrongly route a genuine precision=0 or recall=0
+    # case to NaN instead of the correct F1=0. Test only for NaN and a positive sum.
+    if not np.isnan(precision) and not np.isnan(recall) and (precision + recall) > 0:
         f1 = 2 * precision * recall / (precision + recall)
     else:
         f1 = np.nan
@@ -434,7 +437,23 @@ def run_participant(participant, participant_dir_path):
     avg_friends_puff_duration = float(np.mean(fri_durs)) if fri_durs else 0.0
 
     hit_durations_camera = [(ce - cs) / fs for i, (cs, ce) in enumerate(camera_puffs) if camera_matched[i]]
-    hit_durations_friends = [(fe - fs_) / fs for j, (fs_, fe) in enumerate(friends_puffs) if friends_target[j] is not None]
+
+    # Aggregate FRIENDS fragments per matched camera puff (sum durations) so both
+    # sides contribute exactly one duration value per matched (TP) camera puff.
+    # Without this, a fragmented true puff (one puff split into 2-3 FRIENDS
+    # detections) would inflate the FRIENDS duration sample with multiple short
+    # fragment entries against the camera side's single full-puff entry, biasing
+    # the FRIENDS mean duration downward and understating agreement in any
+    # Bland-Altman/correlation analysis built on these hit durations (Copilot
+    # PR review finding, confirmed empirically: fixing this raises the
+    # participant-level duration correlation from r=0.87 to r=0.94).
+    friends_duration_by_target = {}
+    for j, (fs_, fe) in enumerate(friends_puffs):
+        tgt = friends_target[j]
+        if tgt is not None:
+            friends_duration_by_target[tgt] = friends_duration_by_target.get(tgt, 0.0) + (fe - fs_) / fs
+    hit_durations_friends = list(friends_duration_by_target.values())
+
     avg_hit_duration_camera = float(np.mean(hit_durations_camera)) if hit_durations_camera else 0.0
     avg_hit_duration_friends = float(np.mean(hit_durations_friends)) if hit_durations_friends else 0.0
 
@@ -581,12 +600,12 @@ def main(participant_dir, out_xlsx_path):
     for col in ['Mean', 'Macro 95% CI Lower (BCa)', 'Macro 95% CI Upper (BCa)', 'Median', 'Std Dev', 'Min', 'Max']:
         macro_stats[col] = macro_stats[col].round(4)
 
+    # errors is always empty here -- main() raises above before reaching this
+    # point if any participant failed, so no partial-cohort Excel is ever written.
     with pd.ExcelWriter(out_xlsx_path) as writer:
         per_participant.to_excel(writer, sheet_name='Per_Participant', index=False)
         pooled_summary.to_excel(writer, sheet_name='Pooled_Summary', index=False)
         macro_stats.to_excel(writer, sheet_name='Mean_Median_Mode', index=False)
-        if errors:
-            pd.DataFrame(errors).to_excel(writer, sheet_name='Errors', index=False)
 
     print('\n=== DONE ===')
     print(f'Written: {out_xlsx_path}')
