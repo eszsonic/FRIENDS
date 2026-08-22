@@ -1,2 +1,3 @@
 # FRIENDS
- Code for FRIENDS device
+
+ Code and hardware design for FRIENDS v1 device
