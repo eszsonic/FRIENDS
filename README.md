@@ -13,7 +13,7 @@ FRIENDS/
 ├── flash.h / flash.c   # SPI driver for 4 Mbit serial flash (SST25VF040B)
 ├── targetConfigs/      # Code Composer Studio target-configuration (.ccxml) file
 ├── HARDWARE/
-│   └── V1/             # Schematic, PCB, and BOM (released upon manuscript acceptance)
+│   └── V1/             # Released FRIENDS v1 schematic, PCB, BOM, PDF, and Gerber package
 └── IEEE TIM data/
     ├── HUMAN LAB VALIDATION/   # Human lab study (22 participants)
     ├── DAILY CARRY/            # Daily-carry field study (GeekBar & NJOY devices)
@@ -36,7 +36,16 @@ FRIENDS/
 
 ## Hardware
 
-`HARDWARE/V1/` will contain the schematic, PCB layout, and bill of materials for the FRIENDS v1 device upon acceptance of the manuscript for publication.
+`HARDWARE/V1/` now includes the released FRIENDS v1 hardware design package:
+
+| File | Description |
+|------|-------------|
+| `ecig_msp430_v4.sch` | Native schematic source file. |
+| `ecig_msp430_v4.pcb` | Native PCB layout source file. |
+| `ecig_msp430_v4 - Schematic.pdf` | Exported schematic PDF for quick viewing. |
+| `ecig_msp430_v4 (Bill of Materials).csv` | Bill of materials with component values and part numbers. |
+| `ecig_msp430_v4.zip` | Fabrication package containing Gerber layers and NC drill data. |
+| `README.TXT` | Short hardware-folder note. |
 
 ---
 
